@@ -31,9 +31,9 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Затем создайте файл .env. установить переменные среды и создать базу данных.
+Затем создайте файл .env. установить переменные среды и создайте базу данных.
 
-Example ``.env``:
+Пример ``.env``:
 
 ```
 DBUSER=username
@@ -44,7 +44,7 @@ DBPORT=5432
 
 DEBUG=0
 SECRET_KEY='some_secret_key'
-DJANGO_ALLOWED_HOSTS="*"
+ALLOWED_HOSTS="*"
 ```
 
 Перед запуском нужно выполнить несколько команд:
@@ -82,7 +82,7 @@ DBPORT=5432
 
 DEBUG=0
 SECRET_KEY='some_secret_key'
-DJANGO_ALLOWED_HOSTS="*"
+ALLOWED_HOSTS="*"
 ```
 
 Перед запуском docker-compose выполняем команды:
