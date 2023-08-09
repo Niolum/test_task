@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:14
+    env_file:
+      - ./.env
+    volumes:
+      - taskdb:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  web:
+    build: .
+    container_name: 'test_task'
+    volumes:
+      - static_django_task:/test_task/staticfiles
+  web_migrate:
+    extends:
+      service: web
+    container_name: 'test_task_migrate'
+    command: >
+      /bin/sh -c "python3 manage.py migrate --force-color -v 3
+      && python3 manage.py collectstatic"
+  web_run:
+    extends:
+      service: web
+    container_name: test_task_run
+    env_file:
+      - ./.env
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+
+volumes:
+  static_django_task:
+    external: True
+  taskdb:
+    external: True
